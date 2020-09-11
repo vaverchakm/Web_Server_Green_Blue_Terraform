@@ -1,3 +1,4 @@
+
 #----------------------------------------------------------
 # Provision Highly Availabe Web in any Region Default VPC
 # Create:
@@ -67,7 +68,7 @@ lifecycle {
 #------------------------- Auto Scaling Group using 2 Availability Zones -----------------------------
 
 resource "aws_autoscaling_group" "web" {
-name                 = "WebServer-Higly-Available_ASg"
+name                 = "ASG-${aws_launch_configuration.web.name}"
 launch_configuration = aws_launch_configuration.web.name
 min_size             = 2
 max_size             = 2
@@ -131,4 +132,3 @@ availability_zone = data.aws_availability_zones.available.names[1]
 output "web_loadbalancer_url" {
 value = aws_elb.web.dns_name
 }
-
